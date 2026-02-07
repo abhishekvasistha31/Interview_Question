@@ -1,3 +1,11 @@
+# Interview Questions - 2026
+
+## 📑 Quick Navigation
+- [Caterpillar (Round 1)](#caterpillar-round-1)
+- [Cloud Analogy](#cloud-analogy)
+
+---
+
 # Caterpillar (Round 1)
 
 **Date:** Monday, February 2, 2026  
@@ -45,8 +53,87 @@
 
 ---
 
-### <span style="color: red;">5) What is the difference between interface and abstraction?</span>
+# Cloud Analogy
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">1) How would you detect duplicates in an array of 10 million integers with limited memory?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+```cpp
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+int main() 
+{
+    std::vector<int> vec= { 10,11,12,10,15,14 ,13, 16,10,15};
+    for( std::vector<int>:: iterator iter= vec.begin(); iter!=vec.end()  ; iter++)
+    {
+         int temp= *iter;
+         
+         std::vector<int>:: iterator itr2= iter +1 ;
+         
+         
+         auto x= find( itr2  , vec.end() , temp);
+         if(x != vec.end())
+         {
+           
+            cout<<"There is duplicate of "<<*iter << " in"<<std::endl;
+            copy(vec.begin() , vec.end() , ostream_iterator<int>(cout , " ") );
+            cout<<endl;
+            cout<<"Now delete both the value"<<*iter <<" and"<< *x <<std::endl;
+            
+            
+
+            vec.erase(x);
+            vec.erase(iter);
+            
+             copy(vec.begin() , vec.end() , ostream_iterator<int>(cout , " ") );
+            cout<<endl;
+        }
+         
+         else
+         {
+             
+             cout<<"There is no duplicate of "<<*iter <<std::endl;
+         }
+         
+         //std::cout<<*iter <<std::endl;
+        
+    }
+    
+    // Write C++ code here
+    //std::cout << "Try programiz.pro";
+
+    return 0;
+}
+```
+</span>
+---
+
+### <span style="color: red;">7) What is bit set, bloom filter and caching in C++?</span>
+
+**<span style="color: green;">Answer:I will learn</span>**  
+<span style="color: green;"></span>
+
+---
+
+### <span style="color: red;">8) What is sync and async thread?</span>
 
 **<span style="color: green;">Answer:</span>**  
 <span style="color: green;"></span>
 
+---
+
+### <span style="color: red;">9) What are the types of mutex in C++?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;"></span>
+    
