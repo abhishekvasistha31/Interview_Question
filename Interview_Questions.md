@@ -3,6 +3,7 @@
 ## 📑 Quick Navigation
 - [Caterpillar (Round 1)](#caterpillar-round-1)
 - [Cloud Analogy](#cloud-analogy)
+- [Caterpillar (Round 2)](#caterpillar-round-2)
 
 ---
 
@@ -120,20 +121,208 @@ int main()
 
 ### <span style="color: red;">7) What is bit set, bloom filter and caching in C++?</span>
 
-**<span style="color: green;">Answer:I will learn</span>**  
+**<span style="color: green;">Answer: I will learn</span>**  
 <span style="color: green;"></span>
 
 ---
 
 ### <span style="color: red;">8) What is sync and async thread?</span>
 
-**<span style="color: green;">Answer:</span>**  
+**<span style="color: green;">Answer: I will learn</span>**  
 <span style="color: green;"></span>
 
 ---
 
 ### <span style="color: red;">9) What are the types of mutex in C++?</span>
 
-**<span style="color: green;">Answer:</span>**  
+**<span style="color: green;">Answer: I will learn</span>**  
 <span style="color: green;"></span>
-    
+
+---
+
+# Caterpillar (Round 2)
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">10) What is the use of initialization list?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+Let's take one example and understand the difference:
+
+**Example 1: Using Initialization List**
+```cpp
+class Complex{
+public:
+    int a, b;
+
+    Complex(int x, int y): a(x), b(y)   // 'a' jab bann rha hai kisi class Complex k object
+    {}                                   // ke liye tabhi wo 'x' se initialize ho ja rha hai.
+};                                       // Yha 1 step me kaam ho rha hai.
+```
+
+**Example 2: Assignment in Constructor Body**
+```cpp
+class Complex{
+public:
+    int a, b;
+
+    Complex(int x, int y)    // 'a' jab bann rha hai kisi Complex class ke object
+    {                        // ke liye tabh wo kisi garbage value se initialize ho rha hai
+        a = x;               // then 'x' se initialize ho ja rha hai.
+        b = y;               // Yha 2 steps me kaam ho rha hai.
+    }
+};
+```
+
+**Advantage of Initialization List:**
+
+When there is reference and const data member whose initialization is mandatory at the time of creation.
+
+**1) Const Member:**
+```cpp
+class Complex{
+public:
+    const int a;
+
+    Complex(int x): a(x) {}
+};
+```
+
+**2) Reference Member:**
+```cpp
+class Complex{
+public:
+    int &a;
+
+    Complex(int &x): a(x) {}
+};
+```
+
+</span>
+
+---
+
+### <span style="color: red;">11) In a copy constructor, if no reference is kept how does it call an infinite loop?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+**Without Reference (Causes Infinite Loop):**
+```cpp
+class Complex{
+public:
+    Complex() {}
+
+    Complex(Complex x)  // No reference - causes infinite loop
+    {}
+};
+
+int main()
+{
+    Complex c;
+    Complex A(c);  // Complex X(c) -----> Complex X(c) -----> Complex X(c).....infinite times
+                   // this again call CC    this again call CC
+}
+```
+
+**With Reference (Correct Way):**
+```cpp
+class Complex{
+    Complex(const Complex& x)  // Reference parameter - correct way
+    {}
+};
+
+int main()
+{
+    Complex c;
+    Complex A(c);  // reference of C will go to x.
+}
+```
+
+</span>
+
+---
+
+### <span style="color: red;">12) What is the difference between Assignment and Copy Constructor?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+**Copy Constructor:**
+```cpp
+Complex c(b);  // Copy constructor
+```
+Called on creation of a new object. 'c' jab exist kia usi time initialize bhi hua.
+
+**Assignment Operator:**
+```cpp
+Complex c;
+c = b;  // Assignment operator
+```
+Called for an assignment to an existing object. 'c' already exist kar rha tha line 1 me, 2nd line me initialize hua.
+
+**Note:** `Complex c = b;` is also a Copy Constructor (Similar to `Complex c(b)`)
+
+</span>
+
+---
+
+### <span style="color: red;">13) What is the difference between Abstract class and Interface?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+- **Abstract Class:** Has at least one pure virtual function.
+- **Interface:** Has all the functions as virtual.
+
+</span>
+
+---
+
+### <span style="color: red;">14) Explain about Dynamic cast.</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+Dynamic cast happens only if a class is polymorphic (at least one virtual function).
+
+**Ideal Scenario:**
+```cpp
+Parent* ptr = new Child;
+Child* ch = dynamic_cast<Child*>(ptr);
+```
+
+**Question 1: What if ptr points to Parent object?**
+```cpp
+Parent* ptr = new Parent;
+Child* ch = dynamic_cast<Child*>(ptr);
+```
+**Answer:** It will not give build error. But now `ch = nullptr`.  
+**Why?** Because Runtime par ptr k pass child ke object ka reference hona chahiye. Otherwise it will give us nullptr and dynamic_cast is not successful.
+
+**Question 2: Wrong cast type?**
+```cpp
+Parent* ptr = new Child;
+Child* ch = dynamic_cast<Parent*>(ptr);  // Wrong!
+```
+**Answer:** Build time error. `Parent*>(ptr)` ki jagah `Child*>(ptr)` hona chahiye.
+
+**Question 3: Upcast vs Downcast**
+
+1) **Upcast (No error):**
+```cpp
+Child* ch = new Child;
+Parent* ptr = ch;  // upcast - No error
+```
+
+2) **Downcast (Error):**
+```cpp
+Parent* ptr = new Child;
+Child* ch = (ptr);  // downcast - Error (Can be solved by dynamic_cast)
+```
+
+</span>
