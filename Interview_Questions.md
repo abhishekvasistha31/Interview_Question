@@ -5,6 +5,7 @@
 - [Cloud Analogy](#cloud-analogy)
 - [Caterpillar (Round 2)](#caterpillar-round-2)
 - [Vlink](#vlink)
+- [Concentrix](#concentrix)
 
 ---
 
@@ -438,6 +439,199 @@ int main() {
     return 0;
 }
 ```
+
+</span>
+
+---
+
+# Concentrix
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">1) Tell what will be the output</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+int main() {
+   int a[] = {1, 2, 3, 4, 5, 6};
+   std::cout << (1 + 3)[a] - a[0] + (a + 1)[2];
+}
+```
+
+**Answer:** 5 - 1 + 4 = 8
+
+</span>
+
+---
+
+### <span style="color: red;">2) Tell what will be the output</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+int main() {
+    int arr[5] = {1,2,3,4,5};
+    int* p = arr;
+ 
+    cout << sizeof(arr) << " ";  
+    cout << sizeof(p) << " "; 
+    cout << *(p + 3); 
+}
+```
+
+**Answer:** 20 4 4
+
+</span>
+
+---
+
+### <span style="color: red;">3) How many times the loop will run?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+unsigned char half_limit = 150; 
+ 
+for (unsigned char i = 0; i < 300; ++i)
+{
+    // do something;
+}
+```
+
+**Answer:** unsigned char 0 -255. So, i will never reach till 300
+
+</span>
+
+---
+
+### <span style="color: red;">4) What is mutable and volatile?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+**Volatile:**
+```cpp
+int a=5;
+
+for(  )
+{
+    if(a==5) // now compiler will optimize this part because a is not modified anywhere. 
+    {
+    
+    }
+
+}
+
+volatile int a=5;
+
+for(  )
+{
+    if(a==5) // now compiler will not optimize this part.
+    {
+    
+    }
+
+}
+```
+
+**Mutable:**
+```cpp
+class Test{
+public:
+int x;
+mutable int y;
+
+};
+
+int main()
+{
+ const Test t1;
+ t1.y=10; //allowed because y is mutable
+ t1.x=10; //Compilation error
+}
+```
+
+</span>
+
+---
+
+### <span style="color: red;">5) What is lambda function?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+It is an inline function without name. Used where we want to call function only one single time not multiple times. C++11 feature.
+   
+```cpp
+[]()->void {} ();
+```
+
+- `[]` = capture list
+- `()` = formal arguments
+- `void` = return type
+- `{}` = function definition
+- `()` = function call
+
+</span>
+
+---
+
+### <span style="color: red;">6) What is the difference between ordered map and unordered map?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+- **Ordered:** Store in sorted way. → O(log n)
+- **Unordered:** In random way. Advantage (Quick insertion, deletion) O(1)
+
+</span>
+
+---
+
+### <span style="color: red;">7) What is the size of empty class?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+Size of empty class is 1 byte because compiler will give unique address to everyone.
+
+</span>
+
+---
+
+### <span style="color: red;">8) What is .pdb file?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+A .pdb file in C++ (and generally in Windows development) is a Program Database File created by Microsoft build tools (MSVC, Visual Studio, WinDbg, etc.).  
+It stores debugging and symbol information about your program.
+
+</span>
+
+---
+
+### <span style="color: red;">9) What are advantage and disadvantage of smart pointer?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+**Smart Pointer Advantages:**
+
+1) Memory leaks
+2) Forgetting delete[]
+3) Deleting wrong pointer
+
+**Smart Pointer Disadvantages (Shared Pointer):**
+
+1) It uses reference counting, which means extra work every time it's copied or destroyed.
+2) shared_ptr needs extra memory for its control block (reference counts + deleter).
 
 </span>
 
