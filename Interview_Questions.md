@@ -4,6 +4,7 @@
 - [Caterpillar (Round 1)](#caterpillar-round-1)
 - [Cloud Analogy](#cloud-analogy)
 - [Caterpillar (Round 2)](#caterpillar-round-2)
+- [Vlink](#vlink)
 
 ---
 
@@ -326,3 +327,118 @@ Child* ch = (ptr);  // downcast - Error (Can be solved by dynamic_cast)
 ```
 
 </span>
+
+---
+
+# Vlink
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">1) Remove the duplicate from a vector</span>
+
+**Input:** `[4,2,3,4,5,2]`  
+**Output:** `[4,2,3,5]`
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+    // Write C++ code here
+    vector<int> vec = { 4,2,3,4,5,2};
+    
+    vector<int> :: iterator itr;
+    
+    for( itr = vec.begin() ; itr != vec.end() ; itr++)
+    {
+        vector<int> :: iterator next= itr+1; // address of 2
+       
+       for( next = itr+1 ; next != vec.end() ; next++  ) 
+        {
+             if( *itr == *next)
+            {
+                vec.erase(next);
+                break;
+            }
+        
+        }
+        
+    }  
+    for ( auto it= vec.begin() ; it != vec.end() ; it++ )
+    {
+        cout<<* it <<endl;
+    }
+    
+  return 0;
+}
+```
+
+</span>
+
+---
+
+### <span style="color: red;">2) How can we move unique pointer?</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+#include <iostream>
+ 
+int main() {
+    // Write C++ code here
+    std::cout << "Try programiz.pro";
+std::unique_ptr<int> Uptr( new int);
+std::unique_ptr<int> Uptr2 = move(Uptr);
+ 
+ 
+std::shared_ptr<int> Sptr( new int);
+std::shared_ptr<int> Sptr2(Sptr); //
+ 
+    return 0;
+}
+```
+
+</span>
+
+---
+
+### <span style="color: red;">3) Rotate array by k positions</span>
+
+**Input:** `[1,2,3,4,5,6,7], k=3`  
+**Output:** `[5,6,7,1,2,3,4]`
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> vec = { 1,2,3,4,5,6,7};
+    int k= 3;
+    
+    vector<int> vec1;
+    
+    vec.erase(vec.begin() + (k + 1), vec.begin() + (k + 4));
+    
+    vec1.insert( vec1.end() , vec.begin()   , vec.end() );
+    
+    for(auto itr = vec1.begin() ;  itr!= vec1.end() ; itr++)
+    {
+        cout<<*itr<<endl;
+    }
+    return 0;
+}
+```
+
+</span>
+
+---
