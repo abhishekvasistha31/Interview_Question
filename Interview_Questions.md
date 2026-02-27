@@ -6,6 +6,7 @@
 - [Caterpillar (Round 2)](#caterpillar-round-2)
 - [Vlink](#vlink)
 - [Concentrix](#concentrix)
+- [Amadeus](#amadeus)
 
 ---
 
@@ -633,6 +634,101 @@ It stores debugging and symbol information about your program.
 1) It uses reference counting, which means extra work every time it's copied or destroyed.
 2) shared_ptr needs extra memory for its control block (reference counts + deleter).
 
+</span>
+
+---
+
+# Amadeus
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">1) Sort strings by frequency</span>
+
+**<span style="color: green;">Question:</span>**  
+<span style="color: green;">input = { hii , hello , hello , test , hii , hii }  
+Output = { test , hello , hii }</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+```cpp
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <string>
+#include<map>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+//output = { "test", "hello", "hii"}
+bool comparator(pair<string, int> p1 , pair<string, int>p2)
+{
+    if (p1.second < p2.second)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int main() 
+{
+    vector<string> vec ={ "hii", "hello", "test", "hii", "hii", "hello"};
+    vector<string> ret;
+    
+    map<string, int> Freq;
+    
+    // Count frequencies
+    for(auto str : vec)
+    {
+        Freq[str]++;
+    }
+    
+    // Convert map to vector of pairs for sorting
+    vector<pair<string, int>> freqVec(Freq.begin(), Freq.end());
+    
+    // Sort by frequency (ascending)
+    sort(freqVec.begin(), freqVec.end(), comparator);
+    
+    // Extract sorted strings
+    for(auto p : freqVec)
+    {
+        ret.push_back(p.first);
+    }
+    
+    // Print result
+    cout << "Output: { ";
+    for(int i = 0; i < ret.size(); i++)
+    {
+        cout << ret[i];
+        if(i < ret.size() - 1) cout << " , ";
+    }
+    cout << " }" << endl;
+    
+    return 0;
+}
+```
+</span>
+
+---
+
+### <span style="color: red;">2) Partition array into subarrays with sum equal to k</span>
+
+**<span style="color: green;">Question:</span>**  
+<span style="color: green;">
+
+```
+
+
+// For vec = { 1,2,3,-2,5,1,1,1}; k = 3
+//Find the combination which give the output as sum of k
+// Possible output: { {1,2}, {3}, {-2,5}, {1,1,1}, {2,1} ,{2,1}, {2,1} ,{-2,2,3} }  
+
+```
 </span>
 
 ---
