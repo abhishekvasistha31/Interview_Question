@@ -719,8 +719,6 @@ int main()
 ### <span style="color: red;">2) Partition array into subarrays with sum equal to k</span>
 
 **<span style="color: green;">Question:</span>**  
-<span style="color: green;">
-
 ```
 
 
@@ -729,6 +727,80 @@ int main()
 // Possible output: { {1,2}, {3}, {-2,5}, {1,1,1}, {2,1} ,{2,1}, {2,1} ,{-2,2,3} }  
 
 ```
-</span>
+
+---
+
+### <span style="color: red;">3) Create a self defined shared pointer</span>
+
+**<span style="color: green;">Answer:</span>**  
+```cpp
+//create a share point class that works same as c++ shared pointer
+#include <iostream>
+using namespace std;
+
+template <class X>
+class SHARED_PT {
+private:
+    int* ref_count;
+
+public:
+    X* ptr=nullptr;
+	
+    //default constructor
+    SHARED_PT( X* passedPtr)
+    {
+        passedPtr = new X;
+        ptr = passedPtr;
+        ref_count = new int(1);
+    }
+
+    //copy constructor
+    SHARED_PT(SHARED_PT& obj)
+    {
+
+        this->ptr = obj.ptr;
+        this->ref_count = obj.ref_count;
+        (*ref_count)++;
+    }
+
+
+    ~SHARED_PT()
+    {
+        if (*ref_count != 0)
+        {
+            (*ref_count)--;
+            ptr = nullptr;
+        }
+
+
+    }
+
+    int count()
+    {
+        return *ref_count;
+    }
+
+
+
+};
+
+
+int main()
+{
+    int* ptr = nullptr;
+	
+        SHARED_PT<int> obj(ptr);
+        SHARED_PT<int> obj3(obj);
+    {
+        SHARED_PT<int> obj2(obj);
+        cout << obj2.count() << endl;
+    }
+	
+
+	
+    cout << obj.count() << endl;
+    cout << obj3.count() << endl;
+}
+```
 
 ---
