@@ -7,6 +7,7 @@
 - [Vlink](#vlink)
 - [Concentrix](#concentrix)
 - [Amadeus](#amadeus)
+- [ASM](#asm)
 
 ---
 
@@ -802,5 +803,39 @@ int main()
     cout << obj3.count() << endl;
 }
 ```
+
+---
+
+# ASM
+
+---
+
+## Questions & Answers
+
+### <span style="color: red;">1) What is the main cause of Diamond problem. And how virtual keyword fixes it.</span>
+
+**<span style="color: green;">Answer:</span>**  
+<span style="color: green;">
+
+```
+             A
+         /   \
+        B     C
+         \   /
+             D
+```
+
+Now D has a copy of subobject of A from both B and C, so it will cause ambiguity
+when we try to access members of A through D
+without specifying which path to take (B or C).
+This is known as the "diamond problem" in multiple inheritance.
+This problem comes ONLY and ONLY when you try to access some function of A through D object.
+If you simply create class and check the constructor calling, you can't see the issue. So always create a `fun()` in class A
+to see the issue.
+
+**Answer 2:** When we write `virtual` it ensures that only one copy of subobject of A is created and shared among B and C.
+So now D has no confusion because it also has one copy of subobject of A.
+
+</span>
 
 ---
